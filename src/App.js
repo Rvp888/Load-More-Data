@@ -37,11 +37,11 @@ function App() {
 
   return (
     <div className="container">
-      <div>
+      <div className="product-container">
         {products && products.length
           ? products.map((product) => {
               return (
-                <div key={product.id}>
+                <div key={product.id} className="product">
                   <img
                     src={product.thumbnail}
                     alt={product.title}
@@ -52,6 +52,10 @@ function App() {
               );
             })
           : null}
+      </div>
+
+      <div className="button-container">
+        <button>Load More Products</button>
       </div>
     </div>
   );
