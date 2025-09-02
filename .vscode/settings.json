@@ -1,0 +1,18 @@
+{
+  "auto-close-tag.insertSpaceBeforeSelfClosingTag": true,
+  "auto-close-tag.SublimeText3Mode": true,
+  "autoimport.absolute": true,
+  "path-intellisense.extensionOnImport": true,
+  "javascript.suggest.enabled": true,
+  "javascript.suggest.includeCompletionsForImportStatements": true,
+  "javascript.suggest.paths": true,
+  "javascript.suggest.autoImports": true,
+  "typescript.suggest.autoImports": true,
+  "typescript.suggest.completeFunctionCalls": true,
+  "typescript.suggest.enabled": true,
+  "editor.foldingImportsByDefault": true,
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "javascript.updateImportsOnPaste.enabled": true,
+  "autoimport.showNotifications": true
+}
