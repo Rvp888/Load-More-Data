@@ -1,10 +1,12 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import "./App.css";
 
 function App() {
   const [loading, setLoading] = useState(false);
   const [products, setProducts] = useState([]);
   const [count, setCount] = useState(0);
+  const [imagesLoaded, setImagesLoaded] = useState(0);
+  const [disableButton, setDisableButton] = useState(false);
 
   async function fetchProducts() {
     try {
@@ -17,26 +19,37 @@ function App() {
       const result = await response.json();
       console.log(result);
       if (result && result.products && result.products.length) {
-        setProducts(result.products);
-        setLoading(false);
+        setProducts((prevData) => [...prevData, ...result.products]);
       }
     } catch (e) {
       console.log(e);
-      setLoading(false);
     }
   }
 
   useEffect(() => {
     // Side effects or data fetching logic can go here
     fetchProducts();
-  }, []);
+  }, [count]);
 
-  if (loading) {
-    return <div>Loading Data... Please Wait!</div>;
-  }
+  useEffect(() => {
+    if (products.length !== 0 && imagesLoaded === products.length) {
+      setTimeout(() => {
+        setLoading(false);
+        window.scrollTo({
+          top: document.body.scrollHeight,
+          behavior: "smooth",
+        });
+      }, 300); // delay 100ms to allow paint/layout
+    }
+  }, [imagesLoaded]);
+
+  useEffect(() => {
+    if (products && products.length === 100) setDisableButton(true);
+  }, [products]);
 
   return (
     <div className="container">
+      <h2>Products Page</h2>
       <div className="product-container">
         {products && products.length
           ? products.map((product) => {
@@ -46,6 +59,7 @@ function App() {
                     src={product.thumbnail}
                     alt={product.title}
                     width={100}
+                    onLoad={() => setImagesLoaded((l) => l + 1)}
                   />
                   <p>{product.title}</p>
                 </div>
@@ -55,7 +69,14 @@ function App() {
       </div>
 
       <div className="button-container">
-        <button>Load More Products</button>
+        {loading ? (
+          <div>Loading data please wait...</div>
+        ) : (
+          <button disabled={disableButton} onClick={() => setCount(count + 1)}>
+            Load More Products
+          </button>
+        )}
+        {disableButton && <p>You have reached to 100 products!</p>}
       </div>
     </div>
   );
