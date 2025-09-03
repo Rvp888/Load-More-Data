@@ -24,6 +24,7 @@
 
 .button-container {
   text-align: center;
+  margin-bottom: 20px;
 }
 
 button {
@@ -38,4 +39,8 @@ button {
 button:disabled {
   background: #ccc;
   cursor: not-allowed;
+}
+
+.message {
+  color: red;
 }

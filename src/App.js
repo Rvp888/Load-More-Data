@@ -76,7 +76,9 @@ function App() {
             Load More Products
           </button>
         )}
-        {disableButton && <p>You have reached to 100 products!</p>}
+        {disableButton && (
+          <p className="message">You have reached to 100 products!</p>
+        )}
       </div>
     </div>
   );
